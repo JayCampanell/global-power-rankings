@@ -12,7 +12,7 @@ ui <- page_navbar(
                 fillable = TRUE,
                 sidebar = 
                   sidebar(selectizeInput("mode", "Choose Ranking Method", choices = c("Global","Tournament","Teams")),
-                          selectizeInput("team_name", "Teams", choices = sort(display_rank$"Team Name"), 
+                          selectizeInput("team_name", "Teams", choices = sort(display_rank$search), 
                                          multiple = TRUE, options = list(placeholder = "Please Select Teams")),
                           selectizeInput("tournament", "Tournament", choices = tournament_rankings_display$search,
                                          multiple = FALSE, options = list(placeholder = "Please Select a Tournament"))
