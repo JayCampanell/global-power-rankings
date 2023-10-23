@@ -170,8 +170,7 @@ display_rank <- final_rank %>%
   arrange(desc(rank)) %>%
   mutate(rank2 = 1:nrow(display_rank)) %>%
   mutate(league_slug = toupper(league_slug)) %>%
-  mutate(search = paste0(name, " (", team_id, ")")) %>%
-  select(rank2, name, acronym, slug, rank, league_slug, team_id, search) %>%
+  select(rank2, name, acronym, slug, rank, league_slug, team_id) %>%
   rename(
     "Team Name" = name,
     "Acronym" = acronym,

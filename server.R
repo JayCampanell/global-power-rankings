@@ -1,55 +1,34 @@
-#
-# This is a Shiny web application. You can run the application by clicking
-# the 'Run App' button above.
-#
-# Find out more about building applications with Shiny here:
-#
-#    http://shiny.rstudio.com/
-#
-
-library(shiny)
-library(tidyverse)
-library(DT)
-library(shinyjs)
-library(bslib)
 
 
-
-# Get Dataframes from R script
-# source("riot_read.R")
-
-
-
-# Define UI for application that draws a histogram
 ui <- page_navbar(
   title = "AWS Global Power Rankings",
   theme = bs_theme(bg = "#454040", fg = "#FBF7F7"),
   navset_card_pill(
     nav_panel("Rankings",
-      layout_sidebar(
-            textOutput("instructions"),
-            DT::DTOutput("rankings"),
-            
-              fillable = TRUE,
-              sidebar = 
-                sidebar(selectizeInput("mode", "Choose Ranking Method", choices = c("Global","Tournament","Teams")),
-                        selectizeInput("team_name", "Teams", choices = sort(display_rank$"Team Name"), 
-                          multiple = TRUE, options = list(placeholder = "Please Select Teams")),
-                        selectizeInput("tournament", "Tournament", choices = tournament_rankings_display$search,
-                                       multiple = FALSE, options = list(placeholder = "Please Select a Tournament"))
-                        )
-                        )
+              layout_sidebar(
+                textOutput("instructions"),
+                DT::DTOutput("rankings"),
+                
+                fillable = TRUE,
+                sidebar = 
+                  sidebar(selectizeInput("mode", "Choose Ranking Method", choices = c("Global","Tournament","Teams")),
+                          selectizeInput("team_name", "Teams", choices = sort(display_rank$"Team Name"), 
+                                         multiple = TRUE, options = list(placeholder = "Please Select Teams")),
+                          selectizeInput("tournament", "Tournament", choices = tournament_rankings_display$search,
+                                         multiple = FALSE, options = list(placeholder = "Please Select a Tournament"))
+                  )
+              )
     ),
     nav_panel("About",
               textOutput("about")),
     nav_spacer(),
     nav_item(
-              tags$a(icon("github"), "Source", href = "https://github.com/JayCampanell/global-power-rankings"),
-              target = '_blank'
-            ))
+      tags$a(icon("github"), "Source", href = "https://github.com/JayCampanell/global-power-rankings"),
+      target = '_blank'
+    ))
   
 )
-
+# Define UI for application that draws a histogram
 
 # Define server logic required to draw a histogram
 server <- function(input, output) {
@@ -146,5 +125,4 @@ server <- function(input, output) {
     
 }
 
-# Run the application 
-run_with_themer(shinyApp(ui, server))
+shinyApp(ui, server, onStart = "global.R")
