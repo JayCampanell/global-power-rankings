@@ -98,8 +98,8 @@ regions_df <- leagues_df %>%
 
 # Read in all parquet files from S3 Directory
 
-aws_bucket <- arrow::s3_bucket('chickenjoy-power-rankings', access_key = "AKIAYL74JU2TYVDQ3XHV", 
-                               secret_key = "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")
+aws_bucket <- arrow::s3_bucket('chickenjoy-power-rankings', access_key = "**********", 
+                               secret_key = "*********")
 files <- aws_bucket$ls('parquet/athenaTest2/')
 aws_keys <- map(files, aws_bucket$path)
 games_data <- map_dfr(aws_keys, arrow::read_parquet, .progress = TRUE)
